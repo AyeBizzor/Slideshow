@@ -13,19 +13,19 @@ export const Slideshow = () => {
       <ContainerSlideshow>
       <Slider>
         <img src={render1} alt="not found" />
-        <SlideText>Mesa de trabajo para carpintería</SlideText>
+       
       </Slider>
       <Slider>
         <img src={render3} alt="not found" />
-        <SlideText>Mesa de trabajo para carpintería</SlideText>
+      
       </Slider>
       <Slider>
         <img src={render4} alt="not found" />
-        <SlideText>Mesa de trabajo para carpintería</SlideText>
+       
       </Slider>
       <Slider>
         <img src={render5} alt="not found" />
-        <SlideText>Mesa de trabajo para carpintería</SlideText>
+       
       </Slider>
       <Controles>
         <Boton>
@@ -51,19 +51,21 @@ const ContainerSlideshow = styled.div`
   flex-wrap: nowrap;
 `;
 const Slider = styled.div`
-  min-with: 100%;
-  transition: .3s ease all;
-  z-index: 10;
-  max-height: 500px;
-  position: relative;
+min-width: 100%;
+overflow: hidden;
+transition: .3s ease all;
+z-index: 10;
+max-height: 150rem;
+position: relative;
 
-img{
-width: 100%;
+img {
+  width: 100%;
+  vertical-align: top;
 }
 
 
 `;
-const SlideText = styled.div`
+/* const SlideText = styled.div`
 color: white;
 background: black;
 width: 100%
@@ -76,7 +78,7 @@ bottom: 0;
     position: relative;
 }
 
-`;
+`; */
 
 const Controles= styled.div`
 position: absolute;
@@ -85,14 +87,15 @@ z-index: 20;
 width: 100%;
 height: 100%;
 pointer-events: none;
+
 `
 const Boton= styled.button`
 pointer-events: all;
 background: none;
 border: none;
-background-color: #ff000020
+fill: rgba(0,0,0,.5);
 outline: none;
-width: 50px;
+width: 5rem;
 height: 100%;
 text-align: center;
 position: absolute;

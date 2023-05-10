@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Domine:wght@400;700&family=Francois+One&family=Montserrat:ital,wght@0,300;0,400;0,700;1,400&family=Prata&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Prata', serif;
+    -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: rgb(237, 231, 231);
+}
+
+h1{
+  font-family: 'Prata', serif; }
+
+main{
+  max-width: 1000px;
+	margin: 50px auto;
+	overflow: hidden;
+}

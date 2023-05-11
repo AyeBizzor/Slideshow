@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import render1 from "../img/render.1.jpg";
 import render3 from "../img/render.3.jpg";
 import render4 from "../img/render.4.jpg";
@@ -8,9 +8,69 @@ import { FlechaDerecha } from "../assets/FlechaDerecha";
 import styled from "styled-components";
 
 export const Slideshow = () => {
+
+  const slideeshow = useRef(null)
+
+
+  const siguiente = () => {
+
+    if(slideeshow.current.children.length > 0){
+      //Voy a obtener el primer elemento
+      const primerElemento = slideeshow.current.children[0];
+      //Con esto puedo establcer la transicion del slide
+      slideeshow.current.style.transition='300ms ease-in-out';
+      //Antes de moverlo, debería conseguir el recorrido que debe hacer el slide
+      const tamañoSlide= slideeshow.current.children[0].offsetWidth;
+      //Muevo el slide
+      slideeshow.current.style.transform=`translateX(-${tamañoSlide}px)`;
+
+      const transicion = () => {
+      // Reiniciamos la posicion del Slideshow.
+				slideeshow.current.style.transition = 'none';
+				slideeshow.current.style.transform = `translateX(0)`;
+
+				// Tomamos el primer elemento y lo mandamos al final.
+				slideeshow.current.appendChild(primerElemento);
+
+				slideeshow.current.removeEventListener('transitionend', transicion);
+			}
+
+			// Eventlistener para cuando termina la animacion.
+			slideeshow.current.addEventListener('transitionend', transicion);
+
+
+      
+    }
+
+    //console.log(slideeshow.current)
+    // Tengo que acceder al ContainerSlideshow que tiene las imagenes. Con console.log(slideeshow) notás que muestra un current!! entonce con slideeshow.current accedo a la imagen
+
+
+  }
+
+  const anterior = () => {
+    console.log('anterior')
+  }
+
+
+
+
+
   return (
     <Container>
-      <ContainerSlideshow>
+       <Controles>
+        <Boton  onClick={anterior} >
+          <FlechaIzquierda />
+        </Boton>
+        <Boton derecho onClick={siguiente}   >
+          <FlechaDerecha />
+        </Boton>
+      </Controles>
+
+      <ContainerSlideshow   ref={slideeshow}   >
+
+     
+      
       <Slider>
         <img src={render1} alt="not found" />
        
@@ -27,14 +87,7 @@ export const Slideshow = () => {
         <img src={render5} alt="not found" />
        
       </Slider>
-      <Controles>
-        <Boton>
-          <FlechaIzquierda />
-        </Boton>
-        <Boton derecho>
-          <FlechaDerecha />
-        </Boton>
-      </Controles>
+      
 
       </ContainerSlideshow>
     </Container>
@@ -44,11 +97,13 @@ export const Slideshow = () => {
 
 const Container = styled.div`
 position: relative;
+
 `;
 
 const ContainerSlideshow = styled.div`
   display: flex;
   flex-wrap: nowrap;
+  height: 100%
 `;
 const Slider = styled.div`
 min-width: 100%;
@@ -80,32 +135,33 @@ bottom: 0;
 
 `; */
 
-const Controles= styled.div`
-position: absolute;
-top: 0;
-z-index: 20;
-width: 100%;
-height: 100%;
-pointer-events: none;
+const Controles = styled.div`
+  position: absolute;
+  top: 0;
+  z-index: 20;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+`;
 
-`
-const Boton= styled.button`
-pointer-events: all;
-background: none;
-border: none;
-fill: rgba(0,0,0,.5);
-outline: none;
-width: 5rem;
-height: 100%;
-text-align: center;
-position: absolute;
-transition: .3s ease all;
-&:hover{
-    background: rgba(0,0,0,.2);
-    path{
-        fill: #fff;
+const Boton = styled.button`
+  pointer-events: all;
+  background: none;
+  border: none;
+  z-index: 30;
+  fill: rgba(0, 0, 0, 0.5);
+  outline: none;
+  width: 5rem;
+  height: 100%;
+  text-align: center;
+  position: absolute;
+  transition: 0.3s ease all;
+  &:hover {
+    background: rgba(0, 0, 0, 0.2);
+    path {
+      fill: #fff;
     }
-}
+  }
 
 
 
